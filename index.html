@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    <meta name="keywords"
+        content="Gats, shoot, build, color, armor, play, Gats remake, Remake, GatsIO, Gats-IO, Pistol, SMG, Shotgun, Assault, Sniper, LMG, Burst, DMR, shooter io game, shooter io, battle royale, 2d shooter ">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron:900" rel="stylesheet"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon/site.webmanifest">
+    <title>Gunnarz Dev Client</title>
+      <!--Preload Images-->
+    <link rel="preload" as="image" href="./assets/img/hud-hit.png">
+    <link rel="preload" as="image" href="./assets/img/grid.png">
+    <link rel="preload" as="image" href="./assets/img/colors/blackColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/blueColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/fleshColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/greenColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/maroonColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/orangeColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/pinkColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/purpleColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/pinkColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/purpleColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/redColor.png">
+    <link rel="preload" as="image" href="./assets/img/colors/yellowColor.png">
+    <link rel="preload" as="image" href="./assets/img/armor/armor0.png">
+    <link rel="preload" as="image" href="./assets/img/armor/armor1.png">
+    <link rel="preload" as="image" href="./assets/img/armor/armor2.png">
+    <link rel="preload" as="image" href="./assets/img/armor/armor3.png">
+    <link rel="preload" as="image" href="./assets/img/guns/mp5.png">
+    <!--Initialize Load Screen-->
+    <div id="title2">
+        Loading...
+    </div>
+    <script>
+        console.log('Loading client')
+        var loadStart = Date.now()
+        var loadingText = document.getElementById('title2')
+        var ca = '.'
+        var load = setInterval(() => {
+            if (ca.length > 3) ca = '.'
+            loadingText.innerHTML = `Loading${ca}`
+            ca += '.'
+        }, 500)
+    </script>
+    <!--Load CSS-->
+    <link href="gunnarz-client.css" rel="stylesheet" type="text/css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-208554008-1">
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-208554008-1');
+    </script>
+</head>
+<body id="body" style="background: url(&quot;https://stats.takepoint.io/img/grid.png&quot;);"><div id="title2" style="animation: 1.8s ease 0s 1 normal none running flash; display: none;">Loaded (1870ms)</div>
+ <div id="modos" onclick="Modos()">Dark Mode</div>
+    <button id="force-click" style="text-align:center; display: none;" onclick="loadMain()">
+        Join
+    </button>
+    <div id="title-div" style="display:none;">
+        <h1 id="title">Dev Client V1.5.0</h1>
+    </div>
+    <div id="contenedor-global">
+    <div id="score" class="plantilla-estilo-submenus" style="display:none">
+        <h1 class="title">Top Score</h1>
+        <p class="plantilla-style">Nitrogem35 : 300k</p>
+        <p class="plantilla-style">Guzmàn11 : 263k</p>
+        <p class="plantilla-style">LightLord : 260k</p>
+        <p class="plantilla-style">Astropenis : 252k</p>
+        <p class="plantilla-style">Dasnormalguy : 251k</p>
+        <p class="plantilla-style">FefeUrrs : 223k</p>
+        <p class="plantilla-style">Wolf : 138k</p>
+    </div>
+    <div id="main" style="display: none;">
+        <button id="button-play" >Connecting...</button>
+        <div id="logout-login">
+            <button onclick="openLogin()" id="login" class="boton" style="display: none;">
+                Login
+            </button>
+            <button onclick="openRegister()" id="register" class="boton" style="display: none;">
+                Register
+            </button>
+        </div>
+        <div id="loggedInTxt"></div>
+        <button id="logout-btn" onclick="logout()" style="display: none;">Logout</button>
+        <div class="gun">
+            <h1 class="title">Guns</h1>
+            <button style="width:130px;height:60px;margin-top:10px;" class="boton" onclick="openGuns()"
+                id="guns-boton-click">Open Selector</button>
+        </div>
+        <div id="colors">
+            <h1 class="title">Colors</h1>
+            <div id="color0" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/fleshColor.png);"></div>
+            <div id="color1" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/redColor.png);"></div>
+            <div id="color2" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/orangeColor.png);"></div>
+            <div id="color3" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/yellowColor.png);"></div>
+            <div id="color4" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/greenColor.png);"></div>
+            <div id="color5" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/blueColor.png);"></div>
+            <div id="color6" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/purpleColor.png);"></div>
+            <div id="color7" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/pinkColor.png);"></div>
+            <div id="color8" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/maroonColor.png);"></div>
+								<div id="themes">
+						</div>
+            <!--div id="color9" class="color" onclick="changeColor(this.id);" unselectable="off"
+                style="background:url(assets/img/colors/blackColor.png);"></div-->
+        </div>
+        <div id="armors">
+            <h1 class="title">Armor</h1>
+            <div class="armor-style" id="armor0" onclick="changeArmor(this.id);"
+                style="background:url(assets/img/armor/armor0.png);background-position: center;background-size: 46px;">
+            </div>
+            <div class="armor-style" id="armor1" onclick="changeArmor(this.id);"
+                style="background:url(assets/img/armor/armor1.png);background-position: center;background-size: 40px;">
+            </div>
+            <div class="armor-style" id="armor2" onclick="changeArmor(this.id);"
+                style="background:url(assets/img/armor/armor2.png);background-position: center;background-size: 40px;">
+            </div>
+            <div class="armor-style" id="armor3" onclick="changeArmor(this.id);"
+                style="background:url(assets/img/armor/armor3.png);background-position: center;background-size: 40px;">
+            </div>
+        </div>
+    </div>
+    <div id="como-jugar" style="display:none" class="plantilla-estilo-submenus">
+        <h1 class="title">How to play?</h1>
+				<p class="plantilla-style">Pick a color of your choice.</p>
+				<p class="plantilla-style">Pick the type of armor you want.</p>
+				<p class="plantilla-style">Select your preferred gun.</p>
+    </div>
+    </div>
+    <div id="guns-menu" style="display:none;">
+        <div style="text-align:center;">
+            <h1 id="title-guns">
+                Guns
+            </h1>
+            <div id="guns-row1">
+  
+                <div class="gunsmenux" id="gun-0">
+                 <!--   <div class="info-icon">
+                    <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">	
+                    <div class="info-text">More and more ammo allows for both suppressing fire and offensive fire but beware; it has a slow reload time.</div>
+                    </div>
+                    <div class="center-gun">
+                    <img width="133" height="33" src="./assets/img/guns/sniper%20sas.png" style="transform: translateY(-5px);height: 80%;width: 80%;object-fit: contain;">
+                    </div>
+                    -->
+             </div>
+                <div class="gunsmenux" id="gun-1">
+                    <div class="info-icon">
+                    <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">	
+                    <div class="info-text">More and more ammo allows for both suppressing fire and offensive fire but beware; it has a slow reload time.</div>
+                    </div>
+                    <div class="center-gun">
+                    <img width="170" height="70" src="./assets/img/guns/mp5.png" style="transform: translateY(-15px);height: 90%;width: 90%;object-fit: contain;">
+                    </div>
+             </div>
+            <div class="gunsmenux" id="gun-2">
+                    <div class="info-icon">
+                    <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">
+                    <div class="info-text">An extremely light and agile gun, fast bullets and high damage, but a long reload time</div>
+                    </div>
+                    <div class="center-gun" style="">
+                    <img style="transform: translate(0px,-15px);height: 60%;width: 60%;object-fit: contain;" src="./assets/img/guns/revolver.png">
+                    </div>
+                    </div>
+            <div class="gunsmenux" id="gun-3">
+                    <div class="info-icon">
+                    <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">
+                    <div class="info-text">A light yet extremely powerful handgun; the iconic G17 is used in practically all parts of the world.</div>
+                    </div>
+                    <div class="center-gun" style="
+transform: translateX(10px);
+filter: hie;
+">
+                    <img width="90" height="60" src="./assets/img/guns/pistol.png" style="transform: translate(0px,-15px);height: 55%;width: 55%;object-fit: contain;">
+                    </div>
+            </div>
+            <div class="gunsmenux" id="gun-4">
+                   <div class="info-icon">
+                   <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">
+                   <div class="info-text">If you're looking for both an SMG and an Assault Rifle, but can't pick between both, this is the way to go.</div>
+                   </div>
+                   <div class="center-gun">
+                   <img width="" height="" src="">
+                   </div>
+                   </div>
+            <div class="gunsmenux" id="gun-5">
+                  <div class="info-icon">
+                  <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">
+                  <div class="info-text">The FAMAS doesn't waste ammo quickly and isn't joking. Try and get close, it's quick 3-shot burst will hit your vitals in less than a second. </div>
+                  </div>
+                  <div class="center-gun">
+                  <img width="110" height="70" src="./assets/img/guns/burst.png" style="transform: translate(0px,-15px);height: 75%;width: 70%;object-fit: contain;">
+                  </div>
+                  </div>
+            <div class="gunsmenux" id="gun-6">
+                  <div class="info-icon">
+                  <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">
+                  <div class="info-text">As versatile as wheat, and with the power of Neptune's trident this bad boy can kill anyone with proper use</div>
+                  </div>
+                  <div class="center-gun">
+                  <img width="120" height="80" src="./assets/img/guns/ak47.png" style="transform: translateY(-18px);height: 80%;width: 80%;object-fit: contain;">
+                  </div>
+           </div>
+            <div class="gunsmenux" id="gun-7">
+                  <div class="info-icon">
+                  <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">
+                  <div class="info-text">Although being pretty slow, the semi-automatic SPR has huge damage and a quite long range. </div>
+                  </div>
+                  <div class="center-gun">
+                  <img width="140" height="100" src="./assets/img/guns/Mk-12-SPR-side-profile.png" style="transform: translate(10px,-22px);height: 95%;width: 95%;object-fit: contain;">
+                  </div>
+                  </div>
+           
+            <div class="gunsmenux" id="gun-9">
+                  <div class="info-icon">
+                  <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">
+                  <div class="info-text">The combination of high damage, mobility, and long range will make you a hunter, but being hunted at point blank could be dangerous.</div>
+                  </div>
+                  <div class="center-gun">
+                  <img width="170" height="70" src="./assets/img/guns/sniper sas.png" style="transform: translateY(-15px);height: 90%;width: 90%;object-fit: contain;">
+                  </div>
+                  </div>
+            <div class="gunsmenux" id="gun-10">
+                  <div class="info-icon">
+                  <img src="./assets/img/info-24.png" width="17" height="17" alt="infoIcon">
+                  <div class="info-text"></div>
+                  </div>
+                  <div class="center-gun">
+                  <img width="120" height="100" src="./assets/img/guns/shotgun.png" style="transform: translate(0px, -20px);height: 100%;width: 80%;object-fit: contain;">
+                  </div></div>
+         </div>
+           <button id="select-guns-button" onclick="closeGuns()">Select</button>
+            </div>
+          
+
+        </div>
+    </div>
+    <div id="flex-register" style="display:none;">
+        <div id="register-main">
+       
+<h1 class="title">Score</h1>
+                <p onclick="closeRegister()" class="cerrar">x</p>
+                <label for="regName" class="label-register">Username</label>
+                <input id="regName" class="input-global" autocomplete="off" maxlength="14">
+            </div>
+            <div style="margin-top:10px;">
+                <label for="email" class="label-register">Email</label>
+                <input id="email" class="input-global" maxlength="64">
+            </div>
+            <div style="margin-top:10px;">
+                <label for="regPassword" class="label-register">Password</label>
+                <input id="regPassword" class="input-global" type="password" autocomplete="off" maxlength="40">
+            </div>
+            <div id="register-button">
+                <button id="register-btn" onclick="register()">Register</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="flex-login" style="display:none;">
+        <div id="login-main">
+            <div style="margin-top: 10px;">
+                <p onclick="closeLogin()" class="cerrar">x</p>
+                <label for="name" class="label-login">Username or Email</label>
+                <input id="name" class="input-global" maxlength="64">
+            </div>
+            <div style="margin-top:20px;">
+                <label for="password" class="label-login" >Password</label>
+                <input id="password" type="password" class="input-global" type="password" maxlength="40">
+            </div>
+            <div id="login-button">
+                <button id="login-boton-menu" onclick="login()">Login</button>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" style="display:none;"></div>
+    <div id="serverSelector"></div>
+    <div id="changelog"></div>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+    <script src="builds/1.4.0.js"></script>
+    <!--audio id="onHoverSfx" src="./assets/sfx/button-hover.mp3" preload></audio-->
+    <!--audio id="onHoverSfx2" src="./assets/sfx/button-hover-2.mp3" preload></audio-->
+    <script>
+        var loadTime = Date.now() - loadStart
+        console.log(`Client loaded @ ${loadTime}ms`)
+        onLoad(loadTime)
+    </script>
+
+
+</body>
+
+</html>
